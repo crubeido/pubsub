@@ -54,7 +54,6 @@ public class Trie {
         }
         return false;
     }
-
     public boolean search(String word) {
         Node current = this.root;
         for (int i = 0; i < word.length(); i++) {

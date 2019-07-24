@@ -24,7 +24,7 @@ public class Consumer implements Runnable {
 　　　　3) 단어가 숫자로 시작한다면 number.txt 파일 끝에 주어진 단어를 추가 해야한다.
 　　　　　 예) 1-point, 2-point는 number.txt 파일 끝에 추가 해야한다.
      */
-    static public String makePath(String word) {
+    public String makePath(String word) {
         char firstChar = word.charAt(0);
         String path = this.savePath + "\\";
         if (Character.isUpperCase(firstChar) == true) {
@@ -60,15 +60,17 @@ public class Consumer implements Runnable {
                 String lowerCaseWord = word.toLowerCase();
 
                 if (trie.search(lowerCaseWord)) {
-                    System.out.println("ignore redundant word: " + word);
+                    //System.out.println("ignore redundant word: " + word);
                     continue;
                 } else {
                     trie.insert(lowerCaseWord);
                 }
-                String filePath = makePath(word);
+
+                String filePath = this.makePath(word);
                 String finalWord = word + "\r\n";
                 byte[] content = finalWord.getBytes();
                 FileOutputStream out = null;
+
                 try {
                     out = new FileOutputStream(filePath, true);
                     try {
@@ -93,6 +95,7 @@ public class Consumer implements Runnable {
                 } catch(Exception e) {
                     System.out.println("Consumer[" + this.index + "] FileOutputStream Exception: " + e);
                 }
+
                 // 파일락 없는 버전
                 /* try {
                     out = new FileOutputStream(filePath, true);

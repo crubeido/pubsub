@@ -2,9 +2,9 @@ package pubsub;
 
 import java.time.Duration;
 import java.time.Instant;
-public class App 
-{
-    public static void main( String[] args ) {
+
+public class App {
+    public static void main(String[] args) throws InterruptedException {
         String filePath = null;
         String savePath = null;
         int numOfPartition = 0;
@@ -34,7 +34,7 @@ public class App
             }
         }
 
-        // 처리시간 게산을 위한 시작시간 구하기
+        // 처리시간 계산을 위한 시작시간 구하기
         Instant start = Instant.now();
         {
             /*

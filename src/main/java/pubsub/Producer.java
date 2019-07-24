@@ -21,7 +21,7 @@ public class Producer implements Runnable {
             　· 알파벳이나 숫자가 아닌 문자로 시작하는 단어는 유효하지 않습니다.
         　　　　예) ab!23 (유효함), A12bd (유효함), 123abc (유효함), #abc (유효하지않음)
      */
-    static public boolean validatePattern(String word) {
+    public boolean validatePattern(String word) {
         String firstChar = String.valueOf(word.charAt(0));
         String pattern = "^[a-zA-Z0-9]*$";
         boolean res = Pattern.matches(pattern, firstChar);
@@ -37,7 +37,7 @@ public class Producer implements Runnable {
         4) 유효한 단어들은 N개의 파티션으로 나눠서 Consumer에 전달한다.
            - 동일한 단어는 항상 동일한 파티션에 포함되어야 한다.
     */
-    static public int getHashByFolding(String key, int numOfPartition) {
+    public int getHashByFolding(String key, int numOfPartition) {
         // 대소문자 구분없이 동일한 파티션으로 보내기 위해 소문자로 강제변환
         String lowerKey = key.toLowerCase();
         int hashValue = 0;
@@ -67,7 +67,7 @@ public class Producer implements Runnable {
                     Producer 요구사항
                     3) 유효하지 않은 단어들은 처리를 생략한다.
                  */
-                if (validatePattern(word)) {
+                if (this.validatePattern(word)) {
                     /*
                         Producer 요구사항
                         4) 유효한 단어들은 N개의 파티션으로 나눠서 Consumer에 전달한다.
@@ -109,6 +109,7 @@ public class Producer implements Runnable {
                     e.printStackTrace();
                 }
             }*/
+
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("Producer Exception: " + e);
